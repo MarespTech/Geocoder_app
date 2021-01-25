@@ -1,7 +1,5 @@
 import pandas
 from flask import Flask, render_template, request, send_file
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.sql import func
 from geopy.geocoders import ArcGIS
 nom = ArcGIS()
 
@@ -10,7 +8,6 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template("index.html")
-
 
 @app.route('/success_table',  methods=['POST'])
 def success_table():
@@ -28,7 +25,6 @@ def success_table():
             return render_template("index.html", btn = "download.html", text = data.to_html())
         return render_template("index.html", text = "Please make sure you have an address column in your CSV file!")
         
-
 @app.route('/download')
 def download():
     return send_file("data.csv", as_attachment=True)
